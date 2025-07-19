@@ -1,0 +1,33 @@
+#define MQ3_PIN A0      // Analog pin for MQ-3
+#define RELAY_PIN 8     // Relay control pin
+#define LED_PIN 7       // Optional LED
+
+// Set a threshold (calibrate based on actual readings)
+const int alcoholThreshold = 400;  // Adjust based on testing
+
+void setup() {
+  Serial.begin(9600);
+  pinMode(RELAY_PIN, OUTPUT);
+  pinMode(LED_PIN, OUTPUT);
+  digitalWrite(RELAY_PIN, HIGH);  // Assume engine is ON at start
+}
+
+void loop() {
+  int alcoholLevel = analogRead(MQ3_PIN);
+  Serial.print("Alcohol Sensor Reading: ");
+  Serial.println(alcoholLevel);
+
+  if (alcoholLevel > alcoholThreshold) {
+    // Alcohol detected – Lock engine
+    digitalWrite(RELAY_PIN, LOW);  // Turn off relay
+    digitalWrite(LED_PIN, HIGH);   // Turn on LED
+    Serial.println("ALCOHOL DETECTED - ENGINE LOCKED");
+  } else {
+    // Safe – Keep engine on
+    digitalWrite(RELAY_PIN, HIGH); // Turn on relay
+    digitalWrite(LED_PIN, LOW);    // Turn off LED
+    Serial.println("No alcohol - Engine is ON");
+  }
+
+  delay(1000);  // 1 second delay
+}
