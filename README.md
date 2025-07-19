@@ -1,0 +1,2 @@
+# An-automated-alcohol-sensor-based-engine-lock-and-alert-system.
+An automated alcohol sensor-based engine lock and alert system.  -Detects the presence of alcohol from the driver using an MQ3 sensor. If alcohol is detected beyond a set limit, the system automatically locks the engine to prevent the vehicle from starting. Simultaneously, an alert is sent to concerned authorities or family members for safety.
